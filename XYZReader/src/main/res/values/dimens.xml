@@ -1,5 +1,11 @@
 <resources>
-    <!-- detail -->
+    <dimen name="recycler_view_paddingTop">4dp</dimen>
+    <dimen name="list_item_text_paddin">16dp</dimen>
+    <dimen name="list_item_text_paddin_bottom">4dp</dimen>
+    <dimen name="list_item_title_text_size">16sp</dimen>
+    <dimen name="list_item_text_size">14sp</dimen>
+
+
     <dimen name="detail_title_text_size">32sp</dimen>
     <dimen name="detail_body_text_size">22sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
@@ -8,7 +14,8 @@
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
     <dimen name="card_margin">4dp</dimen>
-    <dimen name="recycler_view_paddingTop">4dp</dimen>
+
     <dimen name="recycler_view_paddingBottom">28dp</dimen>
+
 
 </resources>
