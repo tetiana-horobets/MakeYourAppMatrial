@@ -5,6 +5,8 @@
     <dimen name="list_item_title_text_size">16sp</dimen>
     <dimen name="list_item_text_size">14sp</dimen>
 
+    <dimen name="action_up_layout_width">56dp</dimen>
+
 
     <dimen name="detail_title_text_size">32sp</dimen>
     <dimen name="detail_body_text_size">22sp</dimen>
