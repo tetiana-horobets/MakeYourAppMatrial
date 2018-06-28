@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -50,15 +49,7 @@ public class ArticleDetailFragment extends Fragment implements
     private long mItemId;
     private View mRootView;
     private int mMutedColor = 0xFF333333;
-    private ColorDrawable mStatusBarColorDrawable;
-
-    private int mTopInset;
-    private View mPhotoContainerView;
     private ImageView mPhotoView;
-    private int mScrollY;
-    private FloatingActionButton mShareFab;
-    private boolean mIsCard = false;
-    private int mStatusBarFullOpacityBottom;
 
     @SuppressLint("SimpleDateFormat")
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
@@ -91,11 +82,13 @@ public class ArticleDetailFragment extends Fragment implements
             mItemId = getArguments().getLong(ARG_ITEM_ID);
         }
 
-        mIsCard = getResources().getBoolean(R.bool.detail_is_card);
-        mStatusBarFullOpacityBottom = getResources().getDimensionPixelSize(
+        boolean mIsCard = getResources().getBoolean(R.bool.detail_is_card);
+        int mStatusBarFullOpacityBottom = getResources().getDimensionPixelSize(
                 R.dimen.detail_card_top_margin);
         setHasOptionsMenu(true);
     }
+
+
 
     public ArticleDetailActivity getActivityCast() {
         return (ArticleDetailActivity) getActivity();
@@ -112,17 +105,16 @@ public class ArticleDetailFragment extends Fragment implements
         getLoaderManager().initLoader(0, null, this);
     }
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
-
-
         mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
-        mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
-        mShareFab  = (FloatingActionButton) mRootView.findViewById(R.id.share_fab);
+        View mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
+        FloatingActionButton mShareFab = (FloatingActionButton) mRootView.findViewById(R.id.share_fab);
 
-        mStatusBarColorDrawable = new ColorDrawable(0);
+        ColorDrawable mStatusBarColorDrawable = new ColorDrawable(0);
 
         mShareFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,24 +125,7 @@ public class ArticleDetailFragment extends Fragment implements
                         .getIntent(), getString(R.string.action_share)));
             }
         });
-
-        bindViews();
-        updateStatusBar();
         return mRootView;
-    }
-
-    private void updateStatusBar() {
-        int color = 0;
-        if (mPhotoView != null && mTopInset != 0 && mScrollY > 0) {
-            float f = progress(mScrollY,
-                    mStatusBarFullOpacityBottom - mTopInset * 3,
-                    mStatusBarFullOpacityBottom - mTopInset);
-            color = Color.argb((int) (255 * f),
-                    (int) (Color.red(mMutedColor) * 0.9),
-                    (int) (Color.green(mMutedColor) * 0.9),
-                    (int) (Color.blue(mMutedColor) * 0.9));
-        }
-        mStatusBarColorDrawable.setColor(color);
     }
 
     static float progress(float v, float min, float max) {
@@ -229,7 +204,6 @@ public class ArticleDetailFragment extends Fragment implements
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
                                 mRootView.findViewById(R.id.meta_bar)
                                         .setBackgroundColor(mMutedColor);
-                                updateStatusBar();
                             }
                         }
 
@@ -268,23 +242,12 @@ public class ArticleDetailFragment extends Fragment implements
             mCursor = null;
         }
 
-        bindViews();
+       bindViews();
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> cursorLoader) {
         mCursor = null;
         bindViews();
-    }
-
-    public int getUpButtonFloor() {
-        if (mPhotoContainerView == null || mPhotoView.getHeight() == 0) {
-            return Integer.MAX_VALUE;
-        }
-
-        // account for parallax
-        return mIsCard
-                ? (int) mPhotoContainerView.getTranslationY() + mPhotoView.getHeight() - mScrollY
-                : mPhotoView.getHeight() - mScrollY;
     }
 }

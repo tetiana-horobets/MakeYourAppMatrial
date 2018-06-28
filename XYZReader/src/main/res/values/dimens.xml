@@ -7,8 +7,12 @@
 
     <dimen name="action_up_layout_width">56dp</dimen>
 
-
+    <dimen name="appBarLayout_layout_height">320dp</dimen>
+    <dimen name="toolbarLayout_marginStart">48dp</dimen>
+    <dimen name="toolbarLayout_marginEnd">64dp</dimen>
+    <dimen name="detail_horiz_margin">16dp</dimen>
     <dimen name="detail_title_text_size">32sp</dimen>
+
     <dimen name="detail_body_text_size">22sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
 
@@ -16,6 +20,11 @@
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
     <dimen name="card_margin">4dp</dimen>
+    <dimen name="fab_button_elevation">6dp</dimen>
+
+    <dimen name="fab_height">56dp</dimen>
+    <dimen name="fab_width">56dp</dimen>
+    <dimen name="article_body_marginTop">36dp</dimen>
 
     <dimen name="recycler_view_paddingBottom">28dp</dimen>
 
