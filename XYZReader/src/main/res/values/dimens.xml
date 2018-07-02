@@ -27,6 +27,7 @@
     <dimen name="article_body_marginTop">36dp</dimen>
 
     <dimen name="recycler_view_paddingBottom">28dp</dimen>
+    <dimen name="app_bar_elevation">4dp</dimen>
 
 
 </resources>
